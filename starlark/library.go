@@ -1754,11 +1754,11 @@ func string_format(_ *Thread, b *Builtin, args Tuple, kwargs []Tuple) (Value, er
 			name = field[:i]
 			field = field[i+1:]
 			// "conv" or "conv:spec"
-			if before, after, ok := strings.Cut(field, ":"); !ok {
+			if i := strings.IndexByte(field, ':'); i < 0 {
 				conv = field
 			} else {
-				conv = before
-				spec = after
+				conv = field[:i]
+				spec = field[i+1:]
 			}
 		}
 
@@ -2496,6 +2496,6 @@ func setUpdate(s *Set, args Tuple, kwargs []Tuple) error {
 
 // nameErr returns an error message of the form "name: msg"
 // where name is b.Name() and msg is a string or error.
-func nameErr(b *Builtin, msg any) error {
+func nameErr(b *Builtin, msg interface{}) error {
 	return fmt.Errorf("%s: %v", b.Name(), msg)
 }

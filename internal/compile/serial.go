@@ -248,9 +248,9 @@ func DecodeProgram(data []byte) (_ *Program, err error) {
 	}
 
 	// constants
-	constants := make([]any, d.int())
+	constants := make([]interface{}, d.int())
 	for i := range constants {
-		var c any
+		var c interface{}
 		switch d.int() {
 		case 0:
 			c = d.string()

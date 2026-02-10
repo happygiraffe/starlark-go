@@ -301,7 +301,7 @@ func (b *block) String() string {
 	return "file block"
 }
 
-func (r *resolver) errorf(posn syntax.Position, format string, args ...any) {
+func (r *resolver) errorf(posn syntax.Position, format string, args ...interface{}) {
 	r.errors = append(r.errors, Error{posn, fmt.Sprintf(format, args...)})
 }
 
